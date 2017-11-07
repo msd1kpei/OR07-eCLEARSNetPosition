@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<componentType xmlns="http://xmlns.oracle.com/sca/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ui="http://xmlns.oracle.com/soa/designer/">
+   <service name="RouteNetPositionQueue" ui:wsdlLocation="Inbound_NetPositionQueue.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/jms/ARIS-KPEI-PROJECT/OR07-eCLEARSNetPosition/Inbound_NetPositionQueue#wsdl.interface(Consume_Message_ptt)"/>
+   </service>
+   <reference name="NetPositionAck.netpositionack_client" ui:wsdlLocation="NetPositionAck.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/ARIS_KPEI_PROJECT/OR07_eCLEARSNetPosition/NetPositionAck#wsdl.interface(NetPositionAck)"/>
+   </reference>
+   <reference name="ResponseMessageSender" ui:wsdlLocation="Outbound.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/MW-OSB/sendResponeMsg/sendResponsemsg#wsdl.interface(sendResponsemsg_ptt)"/>
+   </reference>
+</componentType>

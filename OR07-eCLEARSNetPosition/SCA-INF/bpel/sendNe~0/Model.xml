@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="sendNetPositionBPEL" targetNamespace="http://xmlns.oracle.com/KPEIMID_jws/OR07_eCLEARSNetPosition/sendNetPositionBPEL" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/KPEIMID_jws/OR07_eCLEARSNetPosition/sendNetPositionBPEL" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:ns1="http://oracle.com/sca/soapservice/KPEIMID/OR07-eCLEARSNetPosition/OR07_eCLEARSNetPosition" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns2="http://www.kpei.co.id/schema/EqNetPosition.001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns3="http://kpei.co.id/MDwsReply.xsd" xmlns:xpath20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20" xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue" xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk" xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions" xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/file/KPEIMID/OR07-eCLEARSNetPosition/writeNetPositionFA" xmlns:ns5="http://www.kpei.co.id/GE02-FileUtility" xmlns:ns6="http://oracle.com/sca/soapservice/kpei/GE03-XMLUtility/GE03_XMLUtility" xmlns:ns7="http://oracle.com/sca/soapservice/KPEI-MIDDLEWARE/Ge01-messageMonitor/messageMonitorService" xmlns:ns8="http://www.kpei.co.id/kpei/messageMonitor" xmlns:ns9="http://www.kpei.co.id/GE03-XMLUtility/types" xmlns:ns10="http://www.kpei.co.id/razor/eCLEARSNetPosition" xmlns:ns11="http://www.kpei.co.id/GE02-FileUtility/types" xmlns:ns12="http://xmlns.oracle.com/pcbpel/adapter/db/ARIS-KPEI-PROJECT/OR07-eCLEARSNetPosition/REF_CA_select" xmlns:ns13="http://xmlns.oracle.com/pcbpel/adapter/db/top/REF_CA_select" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:socket="http://www.oracle.com/XSL/Transform/java/oracle.tip.adapter.socket.ProtocolTranslator" xmlns:mhdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.mediator.service.common.functions.MediatorExtnFunction" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath" xmlns:med="http://schemas.oracle.com/mediator/xpath" xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath" xmlns:ns14="http://xmlns.oracle.com/pcbpel/adapter/db/ARIS-KPEI-PROJECT/OR07-eCLEARSNetPosition/REF_CA_delete" xmlns:ns15="http://xmlns.oracle.com/pcbpel/adapter/db/top/REF_CA_delete" xmlns:ns16="http://xmlns.oracle.com/pcbpel/adapter/db/ARIS-KPEI-PROJECT/OR07-eCLEARSNetPosition/REF_CA_insert" id="BpPrc0">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="sendnetpositionbpel_client" partnerLinkType="ns1:sendNetPositionBPEL" myRole="execute_ptt"/>
+    <partnerLink name="writeNetPositionFA" partnerRole="Write_role" partnerLinkType="ns4:Write_plt"/>
+    <partnerLink name="fileUtilityRef" partnerRole="GE02-FileUtility" partnerLinkType="ns5:fileUtilityRef"/>
+    <partnerLink name="xmlUtilityRef" partnerRole="GE03-XMLUtility" partnerLinkType="ns6:xmlUtilityRef"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="ns1:requestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="ns1:replyMessage"/>
+    <variable name="filePayload" messageType="ns4:Write_msg"/>
+    <variable name="xmlDataRequest" messageType="ns6:getXMLDataRequestMessage"/>
+    <variable name="xmlData" messageType="ns6:getXMLDataReplyMessage"/>
+    <variable name="messageDigestRequest" messageType="ns6:getMiddlewareConfigRequestMessage"/>
+    <variable name="messageDigest" messageType="ns6:getMiddlewareConfigReplyMessage"/>
+    <variable name="localPathRequest" messageType="ns6:getLogicalDirectoryRequestMessage"/>
+    <variable name="localPath" messageType="ns6:getLogicalDirectoryReplyMessage"/>
+    <variable name="externalPathRequest" messageType="ns6:getLogicalDirectoryRequestMessage"/>
+    <variable name="externalPath" messageType="ns6:getLogicalDirectoryReplyMessage"/>
+    <variable name="drcPathRequest" messageType="ns6:getLogicalDirectoryRequestMessage"/>
+    <variable name="drcPath" messageType="ns6:getLogicalDirectoryReplyMessage"/>
+    <variable name="copyFileRequest" messageType="ns5:copyFileRequestMessage"/>
+    <variable name="copyFileReply" messageType="ns5:copyFileReplyMessage"/>
+    <variable name="validationError" messageType="ns1:replyMessage"/>
+    <variable name="invalidVar" messageType="bpelx:RuntimeFaultMessage"/>
+    <variable name="invokeGetRazorWhatIfPath_getLogicalDirectory_InputVariable" messageType="ns6:getLogicalDirectoryRequestMessage"/>
+    <variable name="invokeGetRazorWhatIfPath_getLogicalDirectory_OutputVariable" messageType="ns6:getLogicalDirectoryReplyMessage"/>
+  </variables>
+  <faultHandlers id="BpFhs0">
+    <catch faultName="bpelx:invalidVariables" faultVariable="invalidVar" id="BpCFt0">
+      <sequence id="BpSeq0">
+        <assign name="a_validateerror" id="BpAss0">
+          <copy>
+            <from expression="'ERROR'"/>
+            <to variable="validationError" part="body" query="/ns3:wsReply/ns3:status"/>
+          </copy>
+          <copy>
+            <from expression="xpath20:current-dateTime()"/>
+            <to variable="validationError" part="body" query="/ns3:wsReply/ns3:receiveDateTime"/>
+          </copy>
+          <copy>
+            <from expression="concat(string(bpws:getVariableData('invalidVar','summary')), ora:getFaultAsString())"/>
+            <to variable="validationError" part="body" query="/ns3:wsReply/ns3:description"/>
+          </copy>
+        </assign>
+        <reply name="validationError" variable="validationError" partnerLink="sendnetpositionbpel_client" portType="ns1:execute_ptt" operation="OR07-sendNetPosition" id="BpRpl0"/>
+      </sequence>
+    </catch>
+    <catchAll id="BpCAl0">
+      <sequence name="seqFaultHandler" id="BpSeq1">
+        <assign name="assignFaultReply" id="BpAss1">
+          <copy>
+            <from expression="'ERROR'"/>
+            <to variable="outputVariable" part="body" query="/ns3:wsReply/ns3:status"/>
+          </copy>
+          <copy>
+            <from expression="concat('[MW001] Error pada sendNetPositionBPEL, InstanceId=',string(ora:getInstanceId()), ora:getFaultAsString())"/>
+            <to variable="outputVariable" part="body" query="/ns3:wsReply/ns3:description"/>
+          </copy>
+          <copy>
+            <from expression="xpath20:current-dateTime()"/>
+            <to variable="outputVariable" part="body" query="/ns3:wsReply/ns3:receiveDateTime"/>
+          </copy>
+        </assign>
+        <reply name="replyFault" variable="outputVariable" partnerLink="sendnetpositionbpel_client" portType="ns1:execute_ptt" operation="OR07-sendNetPosition" id="BpRpl1"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" id="BpSeq2">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in sendNetPositionBPEL.wsdl) -->
+    <receive name="receiveInput" partnerLink="sendnetpositionbpel_client" portType="ns1:execute_ptt" operation="OR07-sendNetPosition" variable="inputVariable" createInstance="yes" id="BpRcv0"/>
+
+    <!-- Generate reply to synchronous request -->
+    <bpelx:validate name="validationXMLElement" variables="inputVariable" id="BpVal0"/>
+    <sequence name="seqConfigure" id="BpSeq3">
+      <assign name="assignInputs" id="BpAss2">
+        <copy>
+          <from expression="'OR07-eCLEARSNetPosition'"/>
+          <to variable="xmlDataRequest" part="request" query="/ns9:getXMLDataRequest/ns9:schemaName"/>
+        </copy>
+        <copy>
+          <from expression="'MESSAGE_DIGEST'"/>
+          <to variable="messageDigestRequest" part="request" query="/ns9:getMiddlewareConfigRequest/ns9:MiddlewareParam"/>
+        </copy>
+        <copy>
+          <from expression="'OR07-eCLEARSNetPosition-local'"/>
+          <to variable="localPathRequest" part="request" query="/ns9:getLogicalDirectoryRequest/ns9:logicalDirectoryName"/>
+        </copy>
+        <copy>
+          <from expression="'OR07-eCLEARSNetPosition-ext'"/>
+          <to variable="externalPathRequest" part="request" query="/ns9:getLogicalDirectoryRequest/ns9:logicalDirectoryName"/>
+        </copy>
+        <copy>
+          <from expression="'OR07-eCLEARSNetPosition-drc'"/>
+          <to variable="drcPathRequest" part="request" query="/ns9:getLogicalDirectoryRequest/ns9:logicalDirectoryName"/>
+        </copy>
+        <copy>
+          <from expression="'OR07-eCLEARSNetPosition-wi'"/>
+          <to variable="invokeGetRazorWhatIfPath_getLogicalDirectory_InputVariable" part="request" query="/ns9:getLogicalDirectoryRequest/ns9:logicalDirectoryName"/>
+        </copy>
+      </assign>
+      <invoke name="invokeGetXMLData" inputVariable="xmlDataRequest" outputVariable="xmlData" partnerLink="xmlUtilityRef" portType="ns6:GE03-XMLUtility" operation="getXMLData" id="BpInv0"/>
+      <invoke name="invokeGetMessageDigest" inputVariable="messageDigestRequest" outputVariable="messageDigest" partnerLink="xmlUtilityRef" portType="ns6:GE03-XMLUtility" operation="getMiddlewareConfig" id="BpInv1"/>
+      <invoke name="invokeGetLocalPath" inputVariable="localPathRequest" outputVariable="localPath" partnerLink="xmlUtilityRef" portType="ns6:GE03-XMLUtility" operation="getLogicalDirectory" id="BpInv2"/>
+      <invoke name="invokeGetExternalPath" inputVariable="externalPathRequest" outputVariable="externalPath" partnerLink="xmlUtilityRef" portType="ns6:GE03-XMLUtility" operation="getLogicalDirectory" id="BpInv3"/>
+    </sequence>
+    <sequence name="seqProcess" id="BpSeq4">
+      <assign name="transformProcess" id="BpAss3">
+        <bpelx:annotation>
+          <bpelx:pattern>transformation</bpelx:pattern>
+        </bpelx:annotation>
+        <copy>
+          <from expression="ora:doXSLTransformForDoc('xsl/toNetPosition.xsl', $inputVariable.body, 'xmlData.reply', $xmlData.reply)"/>
+          <to variable="filePayload" part="body"/>
+        </copy>
+      </assign>
+    </sequence>
+    <sequence name="seqDeliver" id="BpSeq5">
+      <assign name="assignInputs" id="BpAss4">
+        <copy>
+          <from expression="concat(ora:getCurrentDateTime(&quot;yyyyMMddHHmmssSSS&quot;),&quot;_&quot;,ora:getCompositeInstanceId(),&quot;_netPosition&quot;)"/>
+          <to variable="filePayload" part="body" query="/ns10:kpeiInbound/ns10:header/@id"/>
+        </copy>
+        <copy>
+          <from variable="localPath" part="reply" query="/ns9:getLogicalDirectoryReply/ns9:logicalDirectory/ns9:physicalPath"/>
+          <to variable="copyFileRequest" part="request" query="/ns11:copyFileRequest/ns11:sourceDirectory"/>
+        </copy>
+        <copy>
+          <from variable="externalPath" part="reply" query="/ns9:getLogicalDirectoryReply/ns9:logicalDirectory/ns9:physicalPath"/>
+          <to variable="copyFileRequest" part="request" query="/ns11:copyFileRequest/ns11:targetDirectory"/>
+        </copy>
+        <copy>
+          <from expression="concat(bpws:getVariableData('filePayload','body','/ns10:kpeiInbound/ns10:header/@id'),'.xml')"/>
+          <to variable="copyFileRequest" part="request" query="/ns11:copyFileRequest/ns11:fileName"/>
+        </copy>
+        <copy>
+          <from expression="oraext:compare-ignore-case(string(bpws:getVariableData('messageDigest','reply','/ns9:getMiddlewareConfigReply/ns9:Value')),'true') = 0"/>
+          <to variable="copyFileRequest" part="request" query="/ns11:copyFileRequest/ns11:messageDigest"/>
+        </copy>
+      </assign>
+      <assign name="assignDateZ" id="BpAss5">
+        <copy>
+          <from expression="concat(xpath20:format-dateTime(string(bpws:getVariableData('filePayload','body','/ns10:kpeiInbound/ns10:header/ns10:asAt')),'[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01]'),'Z')"/>
+          <to variable="filePayload" part="body" query="/ns10:kpeiInbound/ns10:header/ns10:asAt"/>
+        </copy>
+      </assign>
+      <invoke name="invokeWriteToLocal" inputVariable="filePayload" partnerLink="writeNetPositionFA" portType="ns4:Write_ptt" operation="Write" id="BpInv4">
+        <bpelx:inputProperty name="jca.file.Directory" variable="copyFileRequest" part="request" query="/ns11:copyFileRequest/ns11:sourceDirectory"/>
+        <bpelx:inputProperty name="jca.file.FileName" variable="copyFileRequest" part="request" query="/ns11:copyFileRequest/ns11:fileName"/>
+      </invoke>
+      <invoke name="invokeCopyToExternal" inputVariable="copyFileRequest" outputVariable="copyFileReply" partnerLink="fileUtilityRef" portType="ns5:GE02-FileUtility" operation="copyFile" id="BpInv5"/>
+      <switch name="switchCopyToExternal" id="BpSwt0">
+        <case condition="bpws:getVariableData('copyFileReply','reply','/ns11:copyFileReply/ns11:status') = 'SUCCESS'">
+          <bpelx:annotation>
+            <bpelx:pattern>copyToExternalSuccess</bpelx:pattern>
+          </bpelx:annotation>
+        </case>
+        <otherwise>
+          <throw name="throwCopyToExternalFault" faultName="bpws:invalidReply" id="BpThw0"/>
+        </otherwise>
+      </switch>
+      <scope name="scopeCopyToDRC" id="BpScp0">
+        <bpelx:annotation>
+          <bpelx:general>
+            <bpelx:property name="userLabel">scopeCopyToDRC</bpelx:property>
+          </bpelx:general>
+        </bpelx:annotation>
+        <faultHandlers id="BpFhs1">
+          <catchAll id="BpCAl1">
+            <empty name="ignoredDRCFault" id="BpEmp1"/>
+          </catchAll>
+        </faultHandlers>
+        <sequence name="seqCopyToDRC" id="BpSeq6">
+          <invoke name="invokeGetDRCPath" inputVariable="drcPathRequest" outputVariable="drcPath" partnerLink="xmlUtilityRef" portType="ns6:GE03-XMLUtility" operation="getLogicalDirectory" id="BpInv6"/>
+          <assign name="assignDRCPath" id="BpAss6">
+            <copy>
+              <from variable="drcPath" part="reply" query="/ns9:getLogicalDirectoryReply/ns9:logicalDirectory/ns9:physicalPath"/>
+              <to variable="copyFileRequest" part="request" query="/ns11:copyFileRequest/ns11:targetDirectory"/>
+            </copy>
+          </assign>
+          <invoke name="invokeCopyToDRC" inputVariable="copyFileRequest" outputVariable="copyFileReply" partnerLink="fileUtilityRef" portType="ns5:GE02-FileUtility" operation="copyFile" id="BpInv7"/>
+          <switch name="switchCopyToDRC" id="BpSwt1">
+            <case condition="bpws:getVariableData('copyFileReply','reply','/ns11:copyFileReply/ns11:status') = 'SUCCESS'">
+              <bpelx:annotation>
+                <bpelx:pattern>copyToDRCSuccess</bpelx:pattern>
+              </bpelx:annotation>
+            </case>
+            <otherwise>
+              <throw name="throwCopyToDRCFault" faultName="bpws:invalidReply" id="BpThw1"/>
+            </otherwise>
+          </switch>
+        </sequence>
+      </scope>
+    </sequence>
+    <scope name="scopeCopyToRazorWhatIf" id="BpScp1">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">scopeCopyToRazorWhatIf</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <faultHandlers id="BpFhs2">
+        <catchAll id="BpCAl2">
+          <empty name="emptyCopyToRazorWhatIf" id="BpEmp3"/>
+        </catchAll>
+      </faultHandlers>
+      <sequence id="BpSeq7">
+        <invoke name="invokeGetRazorWhatIfPath" inputVariable="invokeGetRazorWhatIfPath_getLogicalDirectory_InputVariable" outputVariable="invokeGetRazorWhatIfPath_getLogicalDirectory_OutputVariable" partnerLink="xmlUtilityRef" portType="ns6:GE03-XMLUtility" operation="getLogicalDirectory" id="BpInv8"/>
+        <assign name="assignCopyToRazorWhatIf" id="BpAss7">
+          <copy>
+            <from variable="invokeGetRazorWhatIfPath_getLogicalDirectory_OutputVariable" part="reply" query="/ns9:getLogicalDirectoryReply/ns9:logicalDirectory/ns9:physicalPath"/>
+            <to variable="copyFileRequest" part="request" query="/ns11:copyFileRequest/ns11:targetDirectory"/>
+          </copy>
+        </assign>
+        <invoke name="invokeCopyToRazorWhatIf" inputVariable="copyFileRequest" outputVariable="copyFileReply" partnerLink="fileUtilityRef" portType="ns5:GE02-FileUtility" operation="copyFile" id="BpInv9"/>
+        <switch name="Switch_1" id="BpSwt2">
+          <case condition="bpws:getVariableData('copyFileReply','reply','/ns11:copyFileReply/ns11:status') = 'SUCCESS'"/>
+          <otherwise>
+            <throw name="throwCopyToRazorWhatIf" faultName="bpws:forcedTermination" id="BpThw2"/>
+          </otherwise>
+        </switch>
+      </sequence>
+    </scope>
+    <assign name="assignReply" id="BpAss8">
+      <copy>
+        <from expression="'SUCCESS'"/>
+        <to variable="outputVariable" part="body" query="/ns3:wsReply/ns3:status"/>
+      </copy>
+      <copy>
+        <from expression="concat(xpath20:format-dateTime(xpath20:current-dateTime(),'[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01]'),'Z')"/>
+        <to variable="outputVariable" part="body" query="/ns3:wsReply/ns3:receiveDateTime"/>
+      </copy>
+    </assign>
+    <reply name="replyOutput" partnerLink="sendnetpositionbpel_client" portType="ns1:execute_ptt" operation="OR07-sendNetPosition" variable="outputVariable" id="BpRpl2"/>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Apr 13 18:06:59 ICT 2010
+  Author:  Administrator
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

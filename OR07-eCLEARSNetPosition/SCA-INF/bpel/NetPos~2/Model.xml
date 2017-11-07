@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="NetPositionAck" targetNamespace="http://xmlns.oracle.com/ARIS_KPEI_PROJECT/OR07_eCLEARSNetPosition/NetPositionAck" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/ARIS_KPEI_PROJECT/OR07_eCLEARSNetPosition/NetPositionAck" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://oracle.com/sca/soapservice/KPEIMID/OR07-eCLEARSNetPosition/OR07_eCLEARSNetPosition" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="http://www.kpei.co.id/schema/EqNetPosition.001" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:ns4="http://www.kpei.co.id/ResponseMessage" xmlns:ns3="http://kpei.co.id/MDwsReply.xsd" id="BpPrc0">
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="netpositionack_client" partnerLinkType="client:NetPositionAck" myRole="NetPositionAckProvider"/>
+    <partnerLink name="sendNetPositionBPEL.sendnetpositionbpel_client" partnerLinkType="ns1:sendNetPositionBPEL" partnerRole="execute_ptt"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:NetPositionAckRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:NetPositionAckResponseMessage"/>
+    <variable name="sendnetposition_in" messageType="ns1:requestMessage"/>
+    <variable name="sendnetposition_out" messageType="ns1:replyMessage"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" id="BpSeq0">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in NetPositionAck.wsdl) -->
+    <receive name="receiveInput" partnerLink="netpositionack_client" portType="client:NetPositionAck" operation="process" variable="inputVariable" createInstance="yes" id="BpRcv0"/>
+
+    <!-- Generate reply to synchronous request -->
+    <assign name="a_sendnetposition" id="BpAss0">
+      <copy>
+        <from variable="inputVariable" part="payload" query="/ns2:NetPosition"/>
+        <to variable="sendnetposition_in" part="body" query="/ns2:NetPosition"/>
+      </copy>
+    </assign>
+    <invoke name="inv_sendnetposition" bpelx:invokeAsDetail="no" inputVariable="sendnetposition_in" outputVariable="sendnetposition_out" partnerLink="sendNetPositionBPEL.sendnetpositionbpel_client" portType="ns1:execute_ptt" operation="OR07-sendNetPosition" id="BpInv0"/>
+    <assign name="a_reply" id="BpAss1">
+      <copy>
+        <from variable="sendnetposition_out" part="body" query="/ns3:wsReply/ns3:receiveDateTime"/>
+        <to variable="outputVariable" part="payload" query="/ns4:ResponseMessage/ns4:receiveDateTime"/>
+      </copy>
+      <copy>
+        <from variable="sendnetposition_out" part="body" query="/ns3:wsReply/ns3:status"/>
+        <to variable="outputVariable" part="payload" query="/ns4:ResponseMessage/ns4:status"/>
+      </copy>
+      <copy>
+        <from variable="sendnetposition_out" part="body" query="/ns3:wsReply/ns3:description"/>
+        <to variable="outputVariable" part="payload" query="/ns4:ResponseMessage/ns4:description"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload" query="/ns2:NetPosition/ns2:header/@id"/>
+        <to variable="outputVariable" part="payload" query="/ns4:ResponseMessage/ns4:reffMessage"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload" query="/ns2:NetPosition/ns2:header/ns2:source"/>
+        <to variable="outputVariable" part="payload" query="/ns4:ResponseMessage/ns4:sourceMessage"/>
+      </copy>
+    </assign>
+    <reply name="replyOutput" partnerLink="netpositionack_client" portType="client:NetPositionAck" operation="process" variable="outputVariable" id="BpRpl0"/>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Sep 19 10:52:40 ICT 2017
+  Author:  DeddyNu
+  Type: BPEL 1.1 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

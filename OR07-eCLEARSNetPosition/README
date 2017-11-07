@@ -1,0 +1,5 @@
+7 Maret 2016
+Hapus JMS Queue:
+- jms/eclears/NetPositionRequestQueue
+- jms/eclears/NetPositionReplyQueue
+- eis/jms/eclearsNetPositionReply

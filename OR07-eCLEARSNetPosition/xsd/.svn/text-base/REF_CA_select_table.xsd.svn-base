@@ -1,0 +1,30 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/REF_CA_select" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/REF_CA_select" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="CorporateActionsCollection" type="CorporateActionsCollection"/>
+   <xs:complexType name="CorporateActionsCollection">
+      <xs:sequence>
+         <xs:element name="CorporateActions" type="CorporateActions" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="CorporateActions">
+      <xs:sequence>
+         <xs:element name="effDate" type="xs:dateTime" minOccurs="0" nillable="true"/>
+         <xs:element name="recDate" type="xs:dateTime" minOccurs="0" nillable="true"/>
+         <xs:element name="instrumentCode">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="4"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="splitRatio" type="xs:decimal" minOccurs="0" nillable="true"/>
+         <xs:element name="typeCa" type="xs:decimal" minOccurs="0" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="REF_CA_selectSelect_instrument_codeInputParameters" type="REF_CA_selectSelect_instrument_code"/>
+   <xs:complexType name="REF_CA_selectSelect_instrument_code">
+      <xs:sequence>
+         <xs:element name="instrument_code" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

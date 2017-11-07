@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<NetPosition xmlns="http://www.kpei.co.id/eCLEARSNetPositionRequest">
+   <header id="id18">
+      <asAt>2011-05-23T13:53:30.817</asAt>
+      <source>source19</source>
+   </header>
+   <deals>
+      <deal>
+         <dealId>dealId20</dealId>
+         <dealDate>2011-05-23</dealDate>
+         <trade>
+            <tradeType>ETF</tradeType>
+            <counterparty>counterparty22</counterparty>
+            <buySell>BUY</buySell>
+            <product/>
+            <extensions/>
+         </trade>
+      </deal>
+      <deal>
+         <dealId>dealId24</dealId>
+         <dealDate>2011-05-23</dealDate>
+         <trade>
+            <tradeType>ETF</tradeType>
+            <counterparty>counterparty26</counterparty>
+            <buySell>BUY</buySell>
+            <product/>
+            <extensions/>
+         </trade>
+      </deal>
+      <deal>
+         <dealId>dealId28</dealId>
+         <dealDate>2011-05-23</dealDate>
+         <trade>
+            <tradeType>ETF</tradeType>
+            <counterparty>counterparty30</counterparty>
+            <buySell>BUY</buySell>
+            <product/>
+            <extensions/>
+         </trade>
+      </deal>
+   </deals>
+   <ext>
+      <value id="id32">string33</value>
+      <value id="id34">string35</value>
+      <value id="id36">string37</value>
+   </ext>
+</NetPosition>

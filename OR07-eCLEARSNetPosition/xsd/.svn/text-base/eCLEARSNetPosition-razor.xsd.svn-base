@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://www.kpei.co.id/razor/eCLEARSNetPosition"
+            targetNamespace="http://www.kpei.co.id/razor/eCLEARSNetPosition"
+            elementFormDefault="qualified">
+    <xsd:include schemaLocation="eCLEARSNetPosition.xsd" />
+</xsd:schema>

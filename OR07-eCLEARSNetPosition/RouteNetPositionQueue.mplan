@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Mediator name="RouteNetPositionQueue" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/sca/1.0/mediator" wsdlTargetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/ARIS-KPEI-PROJECT/OR07-eCLEARSNetPosition/Inbound_NetPositionQueue">
+   <operation name="Consume_Message" deliveryPolicy="AllOrNothing" priority="4" validateSchema="false">
+      <switch>
+         <case executionType="direct" name="NetPositionAck.netpositionack_client.process">
+            <action>
+               <transform>
+                  <part name="$out.payload" function="xslt(xsl/m_NetPosition_To_NetPositionAck.xsl, $in.body)"/>
+               </transform>
+               <invoke reference="NetPositionAck.netpositionack_client" operation="process">
+                  <onReply>
+                     <transform>
+                        <part name="$out.part1" function="xslt(xsl/m_ResponseMessage_To_ResponseMessageSender.xsl, $in.payload)"/>
+                     </transform>
+                     <forward reference="ResponseMessageSender" operation="execute"/>
+                  </onReply>
+               </invoke>
+            </action>
+         </case>
+      </switch>
+   </operation>
+</Mediator>

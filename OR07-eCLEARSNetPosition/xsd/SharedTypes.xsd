@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+   <xsd:simpleType name="Double">
+      <xsd:restriction base="xsd:decimal">
+         <xsd:totalDigits value="19"/>
+         <xsd:fractionDigits value="9"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="DoubleAmount">
+      <xsd:restriction base="xsd:decimal">
+         <xsd:totalDigits value="19"/>
+         <xsd:fractionDigits value="2"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="DoubleRate">
+      <xsd:restriction base="xsd:decimal">
+         <xsd:totalDigits value="22"/>
+         <xsd:fractionDigits value="10"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="DoubleFactor">
+      <xsd:restriction base="xsd:decimal">
+         <xsd:totalDigits value="19"/>
+         <xsd:fractionDigits value="17"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="Currency">
+      <xsd:restriction base="xsd:string">
+         <xsd:maxLength value="3"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="PartyId">
+      <xsd:restriction base="xsd:string">
+         <xsd:maxLength value="50"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="AgreementId">
+      <xsd:restriction base="xsd:string">
+         <xsd:maxLength value="50"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="String">
+      <xsd:restriction base="xsd:string">
+         <xsd:maxLength value="255"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="SysId">
+      <xsd:restriction base="xsd:int"/>
+   </xsd:simpleType>
+   <xsd:simpleType name="Timestamp">
+      <xsd:restriction base="xsd:dateTime"/>
+   </xsd:simpleType>
+   <xsd:simpleType name="Variant">
+      <xsd:restriction base="xsd:string"/>
+   </xsd:simpleType>
+   <xsd:simpleType name="CalendarId">
+      <xsd:restriction base="xsd:string">
+         <xsd:maxLength value="50"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="DayCountConvention">
+      <xsd:annotation>
+         <xsd:documentation>ATTRIB:shortName:DayCountConvention</xsd:documentation>
+         <xsd:documentation>ATTRIB:desc:Day Basis Conventions (ACT/360,ACT/365, 30/360)</xsd:documentation>
+         <xsd:documentation>ATTRIB:eg:(ACT/360,ACT/365, 30/360)</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:maxLength value="20"/>
+         <xsd:enumeration value="ACT/360"/>
+         <xsd:enumeration value="ACT/365"/>
+         <xsd:enumeration value="30/360"/>
+         <xsd:enumeration value="30E/360"/>
+         <xsd:enumeration value="ACT/ACT"/>
+         <xsd:enumeration value="ACT/365.25"/>
+         <xsd:enumeration value="ACT/365.FIXED"/>
+         <xsd:enumeration value="ACT/365.END"/>
+         <xsd:enumeration value="ACT/365.ACT"/>
+         <xsd:enumeration value="ACT/ACT.ISDA"/>
+         <xsd:enumeration value="ACT/ACT.ISMA"/>
+         <xsd:enumeration value="ACT/ACT.AFB"/>
+         <xsd:enumeration value="1/1"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="PayerReceiver">
+      <xsd:restriction base="xsd:string">
+         <xsd:maxLength value="10"/>
+         <xsd:enumeration value="PAYER"/>
+         <xsd:enumeration value="RECEIVER"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="DateRollConvention">
+      <xsd:restriction base="xsd:string">
+         <xsd:maxLength value="30"/>
+         <xsd:enumeration value="FOLLOWING"/>
+         <xsd:enumeration value="MODFOLLOWING"/>
+         <xsd:enumeration value="MODPRECEDING"/>
+         <xsd:enumeration value="NONE"/>
+         <xsd:enumeration value="PRECEDING"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="RollConvention">
+      <xsd:restriction base="xsd:string">
+         <xsd:maxLength value="10"/>
+         <xsd:enumeration value="1"/>
+         <xsd:enumeration value="2"/>
+         <xsd:enumeration value="3"/>
+         <xsd:enumeration value="4"/>
+         <xsd:enumeration value="5"/>
+         <xsd:enumeration value="6"/>
+         <xsd:enumeration value="7"/>
+         <xsd:enumeration value="8"/>
+         <xsd:enumeration value="9"/>
+         <xsd:enumeration value="10"/>
+         <xsd:enumeration value="11"/>
+         <xsd:enumeration value="12"/>
+         <xsd:enumeration value="13"/>
+         <xsd:enumeration value="14"/>
+         <xsd:enumeration value="15"/>
+         <xsd:enumeration value="16"/>
+         <xsd:enumeration value="17"/>
+         <xsd:enumeration value="18"/>
+         <xsd:enumeration value="19"/>
+         <xsd:enumeration value="20"/>
+         <xsd:enumeration value="21"/>
+         <xsd:enumeration value="22"/>
+         <xsd:enumeration value="23"/>
+         <xsd:enumeration value="24"/>
+         <xsd:enumeration value="25"/>
+         <xsd:enumeration value="26"/>
+         <xsd:enumeration value="27"/>
+         <xsd:enumeration value="28"/>
+         <xsd:enumeration value="29"/>
+         <xsd:enumeration value="30"/>
+         <xsd:enumeration value="CADIMM"/>
+         <xsd:enumeration value="EOM"/>
+         <xsd:enumeration value="MON"/>
+         <xsd:enumeration value="TUE"/>
+         <xsd:enumeration value="WED"/>
+         <xsd:enumeration value="THU"/>
+         <xsd:enumeration value="FRI"/>
+         <xsd:enumeration value="SAT"/>
+         <xsd:enumeration value="SUN"/>
+         <xsd:enumeration value="FRN"/>
+         <xsd:enumeration value="IMM"/>
+         <xsd:enumeration value="NONE"/>
+         <xsd:enumeration value="SFE"/>
+         <xsd:enumeration value="TBILL"/>
+         <xsd:enumeration value="UNKNOWN"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<componentType xmlns="http://xmlns.oracle.com/sca/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ui="http://xmlns.oracle.com/soa/designer/">
+   <service name="netpositionack_client" ui:wsdlLocation="NetPositionAck.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/ARIS_KPEI_PROJECT/OR07_eCLEARSNetPosition/NetPositionAck#wsdl.interface(NetPositionAck)"/>
+   </service>
+   <reference name="sendNetPositionBPEL.sendnetpositionbpel_client" ui:wsdlLocation="OR07_eCLEARSNetPositionRef.wsdl">
+      <interface.wsdl interface="http://oracle.com/sca/soapservice/KPEIMID/OR07-eCLEARSNetPosition/OR07_eCLEARSNetPosition#wsdl.interface(execute_ptt)"/>
+   </reference>
+</componentType>

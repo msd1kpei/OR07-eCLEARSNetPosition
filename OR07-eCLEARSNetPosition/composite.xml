@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<composite name="OR07-eCLEARSNetPosition" applicationName="default" revision="3.3" label="soa_085ea1bc-039d-4a38-a707-fb9e496e468f" mode="active" state="on" home="/soa1/app/oracle/admin/kpeicluster/Node1/mserver/kpeicluster/servers/wls_soa1/dc/soa_085ea1bc-039d-4a38-a707-fb9e496e468f" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/sca/1.0" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy" xmlns:ui="http://xmlns.oracle.com/soa/designer/">
+   <import location="OR07_eCLEARSNetPosition.wsdl" importType="wsdl" namespace="http://oracle.com/sca/soapservice/KPEIMID/OR07-eCLEARSNetPosition/OR07_eCLEARSNetPosition"/>
+   <import location="OR07_eCLEARSNetPositionRef.wsdl" importType="wsdl" namespace="http://oracle.com/sca/soapservice/KPEIMID/OR07-eCLEARSNetPosition/OR07_eCLEARSNetPosition"/>
+   <import location="writeNetPositionFA.wsdl" importType="wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/file/KPEIMID/OR07-eCLEARSNetPosition/writeNetPositionFA"/>
+   <import location="http://serviceserver:7777/soa-infra/services/default/GE01-MessageMonitor/GE01-MessageMonitor?WSDL" importType="wsdl" namespace="http://oracle.com/sca/soapservice/KPEI-MIDDLEWARE/Ge01-messageMonitor/messageMonitorService"/>
+   <import location="http://SERVICESERVER:7777/soa-infra/services/default/GE03-XMLUtility/GE03-XMLUtility.wsdl" importType="wsdl" namespace="http://oracle.com/sca/soapservice/kpei/GE03-XMLUtility/GE03_XMLUtility"/>
+   <import location="http://ServiceServer:7777/kpei/GE02-FileUtility?WSDL" importType="wsdl" namespace="http://www.kpei.co.id/GE02-FileUtility"/>
+   <import location="fileUtilityRef.wsdl" importType="wsdl" namespace="http://www.kpei.co.id/GE02-FileUtility"/>
+   <import location="GE03-XMLUtilityRef.wsdl" importType="wsdl" namespace="http://oracle.com/sca/soapservice/kpei/GE03-XMLUtility/GE03_XMLUtility"/>
+   <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/ARIS-KPEI-PROJECT/OR07-eCLEARSNetPosition/Inbound_NetPositionQueue" location="Inbound_NetPositionQueue.wsdl" importType="wsdl"/>
+   <import namespace="http://xmlns.oracle.com/MW-OSB/sendResponeMsg/sendResponsemsg" location="Outbound.wsdl" importType="wsdl"/>
+   <import namespace="http://xmlns.oracle.com/ARIS_KPEI_PROJECT/OR07_eCLEARSNetPosition/NetPositionAck" location="NetPositionAck.wsdl" importType="wsdl"/>
+   <service name="OR07-eCLEARSNetPosition">
+      <interface.wsdl interface="http://oracle.com/sca/soapservice/KPEIMID/OR07-eCLEARSNetPosition/OR07_eCLEARSNetPosition#wsdl.interface(execute_ptt)"/>
+      <binding.ws port="http://oracle.com/sca/soapservice/KPEIMID/OR07-eCLEARSNetPosition/OR07_eCLEARSNetPosition#wsdl.endpoint(OR07-eCLEARSNetPosition/execute_pt)" streamIncomingAttachments="false" streamOutgoingAttachments="false"/>
+   </service>
+   <service name="Inbound.NetPositionQueue" ui:wsdlLocation="Inbound_NetPositionQueue.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/jms/ARIS-KPEI-PROJECT/OR07-eCLEARSNetPosition/Inbound_NetPositionQueue#wsdl.interface(Consume_Message_ptt)"/>
+      <binding.jca config="Inbound.NetPositionQueue_jms.jca"/>
+   </service>
+   <property name="auditLevel" many="false">Development</property>
+   <property name="validateSchema" type="xs:boolean" many="false">false</property>
+   <component name="sendNetPositionBPEL">
+      <implementation.bpel src="sendNetPositionBPEL.bpel"/>
+      <property name="configuration.sensorLocation" type="xs:string" many="false">sendNetPositionBPEL_sensor.xml</property>
+      <property name="configuration.monitorLocation" type="xs:string" many="false">sendNetPositionBPEL.monitor</property>
+      <property name="configuration.sensorActionLocation" type="xs:string" many="false">sendNetPositionBPEL_sensorAction.xml</property>
+      <business-events/>
+   </component>
+   <component name="RouteNetPositionQueue">
+      <implementation.mediator src="RouteNetPositionQueue.mplan"/>
+   </component>
+   <component name="NetPositionAck" version="1.1">
+      <implementation.bpel src="NetPositionAck.bpel"/>
+   </component>
+   <reference name="xmlUtilityRef">
+      <interface.wsdl interface="http://oracle.com/sca/soapservice/kpei/GE03-XMLUtility/GE03_XMLUtility#wsdl.interface(GE03-XMLUtility)"/>
+      <binding.ws port="http://oracle.com/sca/soapservice/kpei/GE03-XMLUtility/GE03_XMLUtility#wsdl.endpoint(GE03-XMLUtility/GE03-XMLUtility_pt)" location="http://ServiceServer:7777/soa-infra/services/default/GE03-XMLUtility/GE03-XMLUtility?WSDL" streamIncomingAttachments="false" streamOutgoingAttachments="false"/>
+   </reference>
+   <reference name="writeNetPositionFA">
+      <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/file/KPEIMID/OR07-eCLEARSNetPosition/writeNetPositionFA#wsdl.interface(Write_ptt)"/>
+      <binding.jca config="writeNetPositionFA_file.jca" portType="Write_ptt"/>
+   </reference>
+   <reference name="fileUtilityRef">
+      <interface.wsdl interface="http://www.kpei.co.id/GE02-FileUtility#wsdl.interface(GE02-FileUtility)"/>
+      <binding.ws port="http://www.kpei.co.id/GE02-FileUtility#wsdl.endpoint(GE02-FileUtility/GE02-FileUtility)" location="http://ServiceServer:7777/kpei/GE02-FileUtility?WSDL" streamIncomingAttachments="false" streamOutgoingAttachments="false"/>
+   </reference>
+   <reference name="ResponseMessageSender" ui:wsdlLocation="Outbound.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/MW-OSB/sendResponeMsg/sendResponsemsg#wsdl.interface(sendResponsemsg_ptt)"/>
+      <binding.ws port="http://xmlns.oracle.com/MW-OSB/sendResponeMsg/sendResponsemsg#wsdl.endpoint(execute_bindQSService/execute_bindQSPort)" location="Outbound.wsdl" soapVersion="1.1">
+         <property name="weblogic.wsee.wsat.transaction.flowOption" type="xs:string" many="false">WSDLDriven</property>
+      </binding.ws>
+   </reference>
+   <wire>
+      <source.uri>OR07-eCLEARSNetPosition</source.uri>
+      <target.uri>sendNetPositionBPEL/sendnetpositionbpel_client</target.uri>
+   </wire>
+   <wire>
+      <source.uri>sendNetPositionBPEL/writeNetPositionFA</source.uri>
+      <target.uri>writeNetPositionFA</target.uri>
+   </wire>
+   <wire>
+      <source.uri>sendNetPositionBPEL/xmlUtilityRef</source.uri>
+      <target.uri>xmlUtilityRef</target.uri>
+   </wire>
+   <wire>
+      <source.uri>sendNetPositionBPEL/fileUtilityRef</source.uri>
+      <target.uri>fileUtilityRef</target.uri>
+   </wire>
+   <wire>
+      <source.uri>Inbound.NetPositionQueue</source.uri>
+      <target.uri>RouteNetPositionQueue/RouteNetPositionQueue</target.uri>
+   </wire>
+   <wire>
+      <source.uri>NetPositionAck/sendNetPositionBPEL.sendnetpositionbpel_client</source.uri>
+      <target.uri>sendNetPositionBPEL/sendnetpositionbpel_client</target.uri>
+   </wire>
+   <wire>
+      <source.uri>RouteNetPositionQueue/NetPositionAck.netpositionack_client</source.uri>
+      <target.uri>NetPositionAck/netpositionack_client</target.uri>
+   </wire>
+   <wire>
+      <source.uri>RouteNetPositionQueue/ResponseMessageSender</source.uri>
+      <target.uri>ResponseMessageSender</target.uri>
+   </wire>
+</composite>

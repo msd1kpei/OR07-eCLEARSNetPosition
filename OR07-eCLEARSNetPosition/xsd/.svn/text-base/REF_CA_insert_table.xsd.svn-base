@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/REF_CA_insert" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/REF_CA_insert" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="CorporateActionsHisCollection" type="CorporateActionsHisCollection"/>
+   <xs:complexType name="CorporateActionsHisCollection">
+      <xs:sequence>
+         <xs:element name="CorporateActionsHis" type="CorporateActionsHis" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="CorporateActionsHis">
+      <xs:sequence>
+         <xs:element name="effDate" type="xs:date" nillable="true"/>
+         <xs:element name="recDate" type="xs:date" nillable="true"/>
+         <xs:element name="instrumentCode" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="4"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="splitRatio" type="xs:decimal" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

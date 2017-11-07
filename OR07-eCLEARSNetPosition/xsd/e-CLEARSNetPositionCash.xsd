@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+   <xsd:include schemaLocation="SharedTypes.xsd"/>
+   <xsd:element name="kpeiInbound">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="header" type="kpeiHeader"/>
+            <xsd:element name="body">
+               <xsd:complexType>
+                  <xsd:sequence>
+                     <xsd:element ref="content"/>
+                  </xsd:sequence>
+               </xsd:complexType>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:complexType name="kpeiHeader">
+      <xsd:sequence>
+         <xsd:element name="asAt" type="xsd:dateTime">
+            <xsd:annotation>
+               <xsd:documentation>timestamp of the message</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="sourceSystem">
+            <xsd:annotation>
+               <xsd:documentation>originating system that produced the message</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string">
+                  <xsd:maxLength value="100"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+      <xsd:attribute name="id" type="xsd:string" use="required">
+         <xsd:annotation>
+            <xsd:documentation>id of the message</xsd:documentation>
+         </xsd:annotation>
+      </xsd:attribute>
+   </xsd:complexType>
+   <xsd:element name="tradeType">
+      <xsd:simpleType>
+         <xsd:restriction base="xsd:string"/>
+      </xsd:simpleType>
+   </xsd:element>
+   <xsd:element name="tradeId" type="xsd:string"/>
+   <xsd:element name="tradeHeader">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="tradeId"/>
+            <xsd:element ref="tradeDate"/>
+            <xsd:element ref="tradeType"/>
+            <xsd:element ref="counterparty"/>
+            <xsd:element ref="internalUnit"/>
+            <xsd:element ref="buySell"/>
+            <xsd:element ref="status"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="tradeDate" type="xsd:date"/>
+   <xsd:element name="trade">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="tradeHeader"/>
+            <xsd:element ref="product"/>
+            <xsd:element ref="extensions"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="status">
+      <xsd:simpleType>
+         <xsd:restriction base="xsd:string"/>
+      </xsd:simpleType>
+   </xsd:element>
+   <xsd:element name="scheme">
+      <xsd:simpleType>
+         <xsd:restriction base="xsd:string"/>
+      </xsd:simpleType>
+   </xsd:element>
+   <xsd:element name="schema">
+      <xsd:simpleType>
+         <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="FinMark"/>
+         </xsd:restriction>
+      </xsd:simpleType>
+   </xsd:element>
+   <xsd:element name="product">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="cashPayment"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="paymentDate" type="xsd:date"/>
+   <xsd:element name="paymentType">
+      <xsd:simpleType>
+         <xsd:restriction base="xsd:string"/>
+      </xsd:simpleType>
+   </xsd:element>
+   <xsd:element name="numberShares" type="xsd:long"/>
+   <xsd:element name="internalUnit">
+      <xsd:simpleType>
+         <xsd:restriction base="xsd:string"/>
+      </xsd:simpleType>
+   </xsd:element>
+   <xsd:element name="dealType">
+      <xsd:simpleType>
+         <xsd:restriction base="xsd:string"/>
+      </xsd:simpleType>
+   </xsd:element>
+   <xsd:element name="dealId" type="xsd:string"/>
+   <xsd:element name="dealHeader">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="dealId"/>
+            <xsd:element ref="dealType"/>
+            <xsd:element ref="dealDate"/>
+            <xsd:element ref="status"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="dealDate" type="xsd:date"/>
+   <xsd:element name="deal">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="dealHeader"/>
+            <xsd:element ref="trade"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="currency">
+      <xsd:simpleType>
+         <xsd:restriction base="xsd:string"/>
+      </xsd:simpleType>
+   </xsd:element>
+   <xsd:element name="counterparty" type="xsd:string"/>
+   <xsd:element name="content">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="deal"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="buySell">
+      <xsd:simpleType>
+         <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="BUY"/>
+            <xsd:enumeration value="SELL"/>
+         </xsd:restriction>
+      </xsd:simpleType>
+   </xsd:element>
+   <xsd:element name="amount">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:decimal">
+               <xsd:attribute name="ccy" type="Currency" use="required">
+                  <xsd:annotation>
+                     <xsd:documentation>ATTRIB:eg:AUD</xsd:documentation>
+                     <xsd:documentation>ATTRIB:desc:The currency code for the amount</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:attribute>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="adjustedPaymentDate" type="xsd:date"/>
+   <xsd:element name="extensions">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="extension"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="extension">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="value" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="cashPayment">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="amount"/>
+            <xsd:element ref="paymentDate"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+</xsd:schema>

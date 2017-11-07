@@ -1,0 +1,267 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<References xmlns="http://xmlns.oracle.com/adf/jndi">
+   <Reference name="albacoredev-bam-connection" className="oracle.tip.tools.ide.bam.rc.connection.BAMProviderImpl" credentialStoreKey="albacoredev-bam-connection" xmlns="">
+      <Factory className="oracle.tip.tools.ide.bam.rc.connection.BAMProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="USER_NAME">
+            <Contents>weblogic</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="WEBTIER_SERVER_PORT">
+            <Contents>9001</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="EnableAppFlag">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="BAM_SERVER_HOST">
+            <Contents>albacoredev</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="WEBTIER_SERVER">
+            <Contents>albacoredev</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="CONNECTION_NAME">
+            <Contents>albacoredev-bam-connection</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="BAM_SERVER_PORT">
+            <Contents>9001</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="BAM_WEBTIER_PROTOCOL">
+            <Contents>http</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="AppFlag">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <SecureRefAddr addrType="PASSWORD"/>
+         <StringRefAddr addrType="CONNECTION_MODE">
+            <Contents>BASIC</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="eclears" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="eclears" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="subtype">
+            <Contents>oraJDBC</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>ATLANTA</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>192.168.51.172</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="port">
+            <Contents>1521</Contents>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="serviceName">
+            <Contents>KPEIORE1</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="oraDriverType">
+            <Contents>thin</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="arms" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="arms" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="port">
+            <Contents>1433</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="dataSourceName">
+            <Contents>MIDDLEWARE</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>sa</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="subtype">
+            <Contents>SQLServer</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>192.168.52.205</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="instanceName">
+            <Contents/>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="driver">
+            <Contents>com.microsoft.sqlserver.jdbc.SQLServerDriver</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="arms1" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="arms1" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="port">
+            <Contents>1434</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="dataSourceName">
+            <Contents>REFERENCES_DATA</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>sa</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="subtype">
+            <Contents>SQLServer</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>192.168.7.131</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="instanceName">
+            <Contents/>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="driver">
+            <Contents>com.microsoft.sqlserver.jdbc.SQLServerDriver</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="albacoredev" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="albacoredev" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="sid">
+            <Contents>SOAREPD</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="subtype">
+            <Contents>oraJDBC</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>192.168.60.100</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>KPEIMID</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="port">
+            <Contents>1521</Contents>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="oraDriverType">
+            <Contents>thin</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="dperch1-db" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="dperch1-db" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="subtype">
+            <Contents>oraJDBC</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>kpeimid</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>dperch1</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="port">
+            <Contents>1521</Contents>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="serviceName">
+            <Contents>soacldb</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="oraDriverType">
+            <Contents>thin</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="kpeimid" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="kpeimid" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="subtype">
+            <Contents>oraJDBC</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="port">
+            <Contents>1521</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>dperch1</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>kpeimid</Contents>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="serviceName">
+            <Contents>DEVSOACL</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="oraDriverType">
+            <Contents>thin</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="armsdb" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="armsdb" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="port">
+            <Contents>1434</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="dataSourceName">
+            <Contents>REFERENCES_DATA</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>sa</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="subtype">
+            <Contents>SQLServer</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>armsdb</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="instanceName">
+            <Contents/>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="driver">
+            <Contents>com.microsoft.sqlserver.jdbc.SQLServerDriver</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="ds_arms" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="ds_arms" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="port">
+            <Contents>1434</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="dataSourceName">
+            <Contents>REFERENCES_DATA</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>sa</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="subtype">
+            <Contents>SQLServer</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>armsdb</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="instanceName">
+            <Contents/>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="driver">
+            <Contents>com.microsoft.sqlserver.jdbc.SQLServerDriver</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+</References>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="NetPositionAsynProcess" targetNamespace="http://xmlns.oracle.com/ARIS_KPEI_PROJECT/OR07_eCLEARSNetPosition/NetPositionAsynProcess" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/ARIS_KPEI_PROJECT/OR07_eCLEARSNetPosition/NetPositionAsynProcess" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://oracle.com/sca/soapservice/KPEIMID/OR07-eCLEARSNetPosition/OR07_eCLEARSNetPosition" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="http://www.kpei.co.id/schema/EqNetPosition.001" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:ns3="http://www.kpei.co.id/ResponseMessage" xmlns:ns4="http://kpei.co.id/MDwsReply.xsd" id="BpPrc0">
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+    <partnerLinks>
+        <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+        <partnerLink name="netpositionasynprocess_client" partnerLinkType="client:NetPositionAsynProcess" myRole="NetPositionAsynProcessProvider" partnerRole="NetPositionAsynProcessRequester"/>
+        <partnerLink name="sendNetPositionBPEL.sendnetpositionbpel_client" partnerLinkType="ns1:sendNetPositionBPEL" partnerRole="execute_ptt"/>
+    </partnerLinks>
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        VARIABLES                                                        
+        List of messages and XML documents used within this BPEL process 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <variables>
+        <!-- Reference to the message passed as input during initiation -->
+        <variable name="inputVariable" messageType="client:NetPositionAsynProcessRequestMessage"/>
+
+        <!-- Reference to the message that will be sent back to the requester during callback -->
+        <variable name="outputVariable" messageType="client:NetPositionAsynProcessResponseMessage"/>
+        <variable name="netPositionProcess_in" messageType="ns1:requestMessage"/>
+        <variable name="netPositionProcess_out" messageType="ns1:replyMessage"/>
+    </variables>
+    <faultHandlers id="BpFhs0">
+        <catchAll id="BpCAl0">
+            <terminate name="Terminate1" id="BpTer0"/>
+        </catchAll>
+    </faultHandlers>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC                                               
+       Set of activities coordinating the flow of messages across the    
+       services integrated within this business process                  
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <sequence name="main" id="BpSeq0">
+        <!-- Receive input from requestor. (Note: This maps to operation defined in NetPositionAsynProcess.wsdl) -->
+        <receive name="receiveInput" partnerLink="netpositionasynprocess_client" portType="client:NetPositionAsynProcess" operation="process" variable="inputVariable" createInstance="yes" id="BpRcv0"/>
+
+        <!-- 
+          Asynchronous callback to the requester. (Note: the callback location and correlation id is transparently handled using WS-addressing.)
+        -->
+        <assign name="a_netposition" id="BpAss0">
+            <copy>
+                <from variable="inputVariable" part="payload" query="/ns2:NetPosition"/>
+                <to variable="netPositionProcess_in" part="body" query="/ns2:NetPosition"/>
+            </copy>
+        </assign>
+        <invoke name="inv_netPositionProcess" bpelx:invokeAsDetail="no" inputVariable="netPositionProcess_in" outputVariable="netPositionProcess_out" partnerLink="sendNetPositionBPEL.sendnetpositionbpel_client" portType="ns1:execute_ptt" operation="OR07-sendNetPosition" id="BpInv0"/>
+        <assign name="reply" id="BpAss1">
+            <copy>
+                <from variable="netPositionProcess_out" part="body" query="/ns4:wsReply/ns4:receiveDateTime"/>
+                <to variable="outputVariable" part="payload" query="/ns3:ResponseMessage/ns3:receiveDateTime"/>
+            </copy>
+            <copy>
+                <from variable="netPositionProcess_out" part="body" query="/ns4:wsReply/ns4:status"/>
+                <to variable="outputVariable" part="payload" query="/ns3:ResponseMessage/ns3:status"/>
+            </copy>
+            <copy>
+                <from variable="netPositionProcess_out" part="body" query="/ns4:wsReply/ns4:description"/>
+                <to variable="outputVariable" part="payload" query="/ns3:ResponseMessage/ns3:description"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/ns2:NetPosition/ns2:header/@id"/>
+                <to variable="outputVariable" part="payload" query="/ns3:ResponseMessage/ns3:reffMessage"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/ns2:NetPosition/ns2:header/ns2:source"/>
+                <to variable="outputVariable" part="payload" query="/ns3:ResponseMessage/ns3:sourceMessage"/>
+            </copy>
+        </assign>
+        <invoke name="callbackClient" partnerLink="netpositionasynprocess_client" portType="client:NetPositionAsynProcessCallback" operation="processResponse" inputVariable="outputVariable" id="BpInv1"/>
+    </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Sep 18 15:03:02 ICT 2017
+  Author:  DeddyNu
+  Type: BPEL 1.1 Process
+  Purpose: Asynchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

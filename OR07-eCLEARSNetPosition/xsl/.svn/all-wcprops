@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/MII/!svn/ver/3/trunk/MWI/OR07-eCLEARSNetPosition/xsl
+END
+wsReply_To_wsReply.xsl
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/MII/!svn/ver/3/trunk/MWI/OR07-eCLEARSNetPosition/xsl/wsReply_To_wsReply.xsl
+END
+Copy of toNetPosition.xsl
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/MII/!svn/ver/3/trunk/MWI/OR07-eCLEARSNetPosition/xsl/Copy%20of%20toNetPosition.xsl
+END
+toNetPosition.xsl
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/MII/!svn/ver/81/trunk/MWI/OR07-eCLEARSNetPosition/xsl/toNetPosition.xsl
+END
+Transform_CA.xsl
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/MII/!svn/ver/80/trunk/MWI/OR07-eCLEARSNetPosition/xsl/Transform_CA.xsl
+END
+toNetPosition2.xsl
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/MII/!svn/ver/81/trunk/MWI/OR07-eCLEARSNetPosition/xsl/toNetPosition2.xsl
+END
+NetPosition-rev_To_NetPosition.xsl
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MII/!svn/ver/3/trunk/MWI/OR07-eCLEARSNetPosition/xsl/NetPosition-rev_To_NetPosition.xsl
+END
+toRelationLog.xsl
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/MII/!svn/ver/3/trunk/MWI/OR07-eCLEARSNetPosition/xsl/toRelationLog.xsl
+END
+Transformation_1.xsl
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/MII/!svn/ver/55/trunk/MWI/OR07-eCLEARSNetPosition/xsl/Transformation_1.xsl
+END
+NetPosition_To_NetPosition.xsl
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/MII/!svn/ver/3/trunk/MWI/OR07-eCLEARSNetPosition/xsl/NetPosition_To_NetPosition.xsl
+END
+NetPosition_To_NetPosition_2.xsl
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/MII/!svn/ver/3/trunk/MWI/OR07-eCLEARSNetPosition/xsl/NetPosition_To_NetPosition_2.xsl
+END

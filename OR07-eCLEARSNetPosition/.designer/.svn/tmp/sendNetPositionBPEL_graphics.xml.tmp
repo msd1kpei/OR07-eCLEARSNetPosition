@@ -1,0 +1,43 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<graphics>
+   <diagram popupEditor="false" fixedWidthSwimlanes="true" roundedPartnerlinks="true" centerZoom="true" validateOnLoad="true" confirmBeforeDelete="true" selectedPartnerLinkColor="0,0,153" swimlaneBackground="240,240,240" swimlaneDividerBackground="218,218,218" graphBackground="255,255,255" selectedBorderBackground="49,105,198" connectedPartnerLinkColor="204,204,255" connectablePartnerLinkColor="0,0,255" unconnectedPartnerLinkColor="192,192,192"/>
+   <annotationfile/>
+   <iconize assign="no" invoke="no" receive="no" reply="no" transform="no" terminate="no" wait="no" compensate="no" empty="no" javaembedding="no" throw="no" validate="no" dropzone="no" sequence="no" scope="no" pick="no" while="no" flow="no" switch="no" onalarm="no" onmessage="no" catch="no" catchall="no" compensationhandler="no" optimize="no"/>
+<<<<<<< .mine
+   <partnerlink_locations>
+      <partnerlink name="sendnetpositionbpel_client" x="0" y="959" side="left"/>
+      <partnerlink name="writeNetPositionFA" x="1231" y="2382" side="right"/>
+      <partnerlink name="fileUtilityRef" x="1231" y="1238" side="right"/>
+      <partnerlink name="xmlUtilityRef" x="1231" y="1371" side="right"/>
+      <partnerlink name="monitorRef" x="1231" y="2250" side="right"/>
+      <partnerlink name="REF_CA_select" x="1231" y="739" side="right"/>
+      <partnerlink name="REF_CA_delete" x="1231" y="1181" side="right"/>
+      <partnerlink name="REF_CA_insert" x="1231" y="1028" side="right"/>
+   </partnerlink_locations>
+   <graph_layout viewport="613,176,745,333" show_swimlanes="true">
+      <layout_item collapsed="false" xpath="/process/process" type="Process" showhandlers="true"/>
+      <layout_item collapsed="false" xpath="/process/faultHandlers/catch" type="Catch"/>
+      <layout_item collapsed="false" xpath="/process/faultHandlers/catch/sequence" type="Sequence"/>
+      <layout_item collapsed="true" xpath="/process/faultHandlers/catchAll" type="CatchAll"/>
+      <layout_item collapsed="false" xpath="/process/faultHandlers/catchAll/sequence" type="Sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence" type="Sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/sequence[1]" type="Sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch" type="Switch"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch/case/sequence" type="Sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch/case/sequence/switch" type="Switch"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch/case/sequence/switch/case[1]/sequence" type="Sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/sequence[2]" type="Sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/sequence[3]" type="Sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/sequence[4]" type="Sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/sequence[4]/switch" type="Switch"/>
+      <layout_item collapsed="true" xpath="/process/sequence/sequence[4]/scope" type="Scope" showhandlers="true"/>
+      <layout_item collapsed="true" xpath="/process/sequence/sequence[4]/scope/faultHandlers/catchAll" type="CatchAll"/>
+      <layout_item collapsed="false" xpath="/process/sequence/sequence[4]/scope/sequence" type="Sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/sequence[4]/scope/sequence/switch" type="Switch"/>
+      <layout_item collapsed="false" xpath="/process/sequence/sequence[5]" type="Sequence"/>
+   </graph_layout>
+   <bookmarks/>
+=======
+   <outliner/>
+>>>>>>> .r48
+</graphics>

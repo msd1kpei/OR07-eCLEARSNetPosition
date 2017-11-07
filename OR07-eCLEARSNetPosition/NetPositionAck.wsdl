@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="NetPositionAck" targetNamespace="http://xmlns.oracle.com/ARIS_KPEI_PROJECT/OR07_eCLEARSNetPosition/NetPositionAck" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:client="http://xmlns.oracle.com/ARIS_KPEI_PROJECT/OR07_eCLEARSNetPosition/NetPositionAck" xmlns:ns1="http://www.kpei.co.id/schema/EqNetPosition.001" xmlns:ns2="http://www.kpei.co.id/ResponseMessage" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+   <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://www.kpei.co.id/schema/EqNetPosition.001" schemaLocation="xsd/eCLEARSNetPosition-request.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://www.kpei.co.id/ResponseMessage" schemaLocation="xsd/ResponseMessage.xsd"/>
+      </schema>
+   </wsdl:types>
+   <wsdl:message name="NetPositionAckRequestMessage">
+      <wsdl:part name="payload" element="ns1:NetPosition"/>
+   </wsdl:message>
+   <wsdl:message name="NetPositionAckResponseMessage">
+      <wsdl:part name="payload" element="ns2:ResponseMessage"/>
+   </wsdl:message>
+   <wsdl:portType name="NetPositionAck">
+      <wsdl:operation name="process">
+         <wsdl:input message="client:NetPositionAckRequestMessage"/>
+         <wsdl:output message="client:NetPositionAckResponseMessage"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <plnk:partnerLinkType name="NetPositionAck">
+      <plnk:role name="NetPositionAckProvider">
+         <plnk:portType name="client:NetPositionAck"/>
+      </plnk:role>
+   </plnk:partnerLinkType>
+</wsdl:definitions>

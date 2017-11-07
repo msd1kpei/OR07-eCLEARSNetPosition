@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/MII/!svn/ver/17/trunk/MWI/OR07-eCLEARSNetPosition/xsd
+END
+REF_CA_select_table.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/MII/!svn/ver/79/trunk/MWI/OR07-eCLEARSNetPosition/xsd/REF_CA_select_table.xsd
+END
+eCLEARSNetPosition-razor.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/MII/!svn/ver/3/trunk/MWI/OR07-eCLEARSNetPosition/xsd/eCLEARSNetPosition-razor.xsd
+END
+MDwsReply.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/MII/!svn/ver/3/trunk/MWI/OR07-eCLEARSNetPosition/xsd/MDwsReply.xsd
+END
+MiddlewareHeader.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/MII/!svn/ver/3/trunk/MWI/OR07-eCLEARSNetPosition/xsd/MiddlewareHeader.xsd
+END
+e-CLEARSNetPositionCash.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/MII/!svn/ver/3/trunk/MWI/OR07-eCLEARSNetPosition/xsd/e-CLEARSNetPositionCash.xsd
+END
+REF_CA_delete_table.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/MII/!svn/ver/17/trunk/MWI/OR07-eCLEARSNetPosition/xsd/REF_CA_delete_table.xsd
+END
+ExpandableVariable.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/MII/!svn/ver/3/trunk/MWI/OR07-eCLEARSNetPosition/xsd/ExpandableVariable.xsd
+END
+eCLEARSNetPosition-request-rev.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MII/!svn/ver/3/trunk/MWI/OR07-eCLEARSNetPosition/xsd/eCLEARSNetPosition-request-rev.xsd
+END
+eCLEARSNetPosition.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/MII/!svn/ver/3/trunk/MWI/OR07-eCLEARSNetPosition/xsd/eCLEARSNetPosition.xsd
+END
+REF_CA_insert_table.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/MII/!svn/ver/55/trunk/MWI/OR07-eCLEARSNetPosition/xsd/REF_CA_insert_table.xsd
+END
+SharedTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/MII/!svn/ver/3/trunk/MWI/OR07-eCLEARSNetPosition/xsd/SharedTypes.xsd
+END
+Equity.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/MII/!svn/ver/3/trunk/MWI/OR07-eCLEARSNetPosition/xsd/Equity.xsd
+END
+eCLEARSNetPosition-request.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/MII/!svn/ver/3/trunk/MWI/OR07-eCLEARSNetPosition/xsd/eCLEARSNetPosition-request.xsd
+END

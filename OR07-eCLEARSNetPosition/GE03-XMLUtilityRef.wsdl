@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="GE03_XMLUtility" targetNamespace="http://oracle.com/sca/soapservice/kpei/GE03-XMLUtility/GE03_XMLUtility" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://oracle.com/sca/soapservice/kpei/GE03-XMLUtility/GE03_XMLUtility" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <plnk:partnerLinkType name="xmlUtilityRef">
+      <plnk:role name="GE03-XMLUtility">
+         <plnk:portType name="tns:GE03-XMLUtility"/>
+      </plnk:role>
+   </plnk:partnerLinkType>
+   <wsdl:import namespace="http://oracle.com/sca/soapservice/kpei/GE03-XMLUtility/GE03_XMLUtility" location="http://SERVICESERVER:7777/soa-infra/services/default/GE03-XMLUtility/GE03-XMLUtility.wsdl"/>
+</wsdl:definitions>
