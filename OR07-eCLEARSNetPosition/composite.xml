@@ -21,8 +21,26 @@
    </service>
    <property name="auditLevel" many="false">Development</property>
    <property name="validateSchema" type="xs:boolean" many="false">false</property>
+   <property name="originalProductVersion" type="xs:string" many="false">11.0.0.0.0</property>
+   <property name="productVersion" type="xs:string" many="false">12.2.1.3.0.170820</property>
+   <property name="compositeID" type="xs:string" many="false">8c9603d8-276b-4e96-b99a-ea6d2275fb4c</property>
    <component name="sendNetPositionBPEL">
       <implementation.bpel src="sendNetPositionBPEL.bpel"/>
+      <componentType xmlns="http://xmlns.oracle.com/sca/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                     xmlns:ui="http://xmlns.oracle.com/soa/designer/">
+         <service name="sendnetpositionbpel_client" ui:wsdlLocation="OR07_eCLEARSNetPositionRef.wsdl">
+            <interface.wsdl interface="http://oracle.com/sca/soapservice/KPEIMID/OR07-eCLEARSNetPosition/OR07_eCLEARSNetPosition#wsdl.interface(execute_ptt)"/>
+         </service>
+         <reference name="writeNetPositionFA" ui:wsdlLocation="writeNetPositionFA.wsdl">
+            <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/file/KPEIMID/OR07-eCLEARSNetPosition/writeNetPositionFA#wsdl.interface(Write_ptt)"/>
+         </reference>
+         <reference name="fileUtilityRef" ui:wsdlLocation="fileUtilityRef.wsdl">
+            <interface.wsdl interface="http://www.kpei.co.id/GE02-FileUtility#wsdl.interface(GE02-FileUtility)"/>
+         </reference>
+         <reference name="xmlUtilityRef" ui:wsdlLocation="GE03-XMLUtilityRef.wsdl">
+            <interface.wsdl interface="http://oracle.com/sca/soapservice/kpei/GE03-XMLUtility/GE03_XMLUtility#wsdl.interface(GE03-XMLUtility)"/>
+         </reference>
+      </componentType>
       <property name="configuration.sensorLocation" type="xs:string" many="false">sendNetPositionBPEL_sensor.xml</property>
       <property name="configuration.monitorLocation" type="xs:string" many="false">sendNetPositionBPEL.monitor</property>
       <property name="configuration.sensorActionLocation" type="xs:string" many="false">sendNetPositionBPEL_sensorAction.xml</property>
@@ -30,9 +48,31 @@
    </component>
    <component name="RouteNetPositionQueue">
       <implementation.mediator src="RouteNetPositionQueue.mplan"/>
+      <componentType xmlns="http://xmlns.oracle.com/sca/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                     xmlns:ui="http://xmlns.oracle.com/soa/designer/">
+         <service name="RouteNetPositionQueue" ui:wsdlLocation="Inbound_NetPositionQueue.wsdl">
+            <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/jms/ARIS-KPEI-PROJECT/OR07-eCLEARSNetPosition/Inbound_NetPositionQueue#wsdl.interface(Consume_Message_ptt)"/>
+         </service>
+         <reference name="NetPositionAck.netpositionack_client" ui:wsdlLocation="NetPositionAck.wsdl">
+            <interface.wsdl interface="http://xmlns.oracle.com/ARIS_KPEI_PROJECT/OR07_eCLEARSNetPosition/NetPositionAck#wsdl.interface(NetPositionAck)"/>
+         </reference>
+         <reference name="ResponseMessageSender" ui:wsdlLocation="Outbound.wsdl">
+            <interface.wsdl interface="http://xmlns.oracle.com/MW-OSB/sendResponeMsg/sendResponsemsg#wsdl.interface(sendResponsemsg_ptt)"/>
+         </reference>
+      </componentType>
    </component>
    <component name="NetPositionAck" version="1.1">
       <implementation.bpel src="NetPositionAck.bpel"/>
+      <componentType xmlns="http://xmlns.oracle.com/sca/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                     xmlns:ui="http://xmlns.oracle.com/soa/designer/">
+         <service name="netpositionack_client" ui:wsdlLocation="NetPositionAck.wsdl">
+            <interface.wsdl interface="http://xmlns.oracle.com/ARIS_KPEI_PROJECT/OR07_eCLEARSNetPosition/NetPositionAck#wsdl.interface(NetPositionAck)"/>
+         </service>
+         <reference name="sendNetPositionBPEL.sendnetpositionbpel_client"
+                    ui:wsdlLocation="OR07_eCLEARSNetPositionRef.wsdl">
+            <interface.wsdl interface="http://oracle.com/sca/soapservice/KPEIMID/OR07-eCLEARSNetPosition/OR07_eCLEARSNetPosition#wsdl.interface(execute_ptt)"/>
+         </reference>
+      </componentType>
    </component>
    <reference name="xmlUtilityRef">
       <interface.wsdl interface="http://oracle.com/sca/soapservice/kpei/GE03-XMLUtility/GE03_XMLUtility#wsdl.interface(GE03-XMLUtility)"/>

@@ -1,5 +1,5 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<adapter-config name="writeNetPositionFA" adapter="File Adapter" wsdlLocation="writeNetPositionFA.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+<?xml version="1.0" encoding="UTF-8"?>
+<adapter-config name="writeNetPositionFA" adapter="file" wsdlLocation="writeNetPositionFA.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
    <connection-factory location="eis/FileAdapter" adapterRef=""/>
    <endpoint-interaction portType="Write_ptt" operation="Write">
       <interaction-spec className="oracle.tip.adapter.file.outbound.FileInteractionSpec">

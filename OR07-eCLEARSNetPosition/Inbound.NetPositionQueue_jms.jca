@@ -1,5 +1,5 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<adapter-config name="Inbound.NetPositionQueue" adapter="JMS Adapter" wsdlLocation="Inbound_NetPositionQueue.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+<?xml version="1.0" encoding="UTF-8"?>
+<adapter-config name="Inbound.NetPositionQueue" adapter="jms" wsdlLocation="Inbound_NetPositionQueue.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
    <connection-factory location="eis/jms/osb" UIJmsProvider="WLSJMS" UIConnectionName="development"/>
    <endpoint-activation portType="Consume_Message_ptt" operation="Consume_Message">
       <activation-spec className="oracle.tip.adapter.jms.inbound.JmsConsumeActivationSpec">
